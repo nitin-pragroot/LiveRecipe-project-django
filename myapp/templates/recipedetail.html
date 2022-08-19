@@ -1,0 +1,234 @@
+{%load static%}
+{%include 'header.html'%}
+{%load humanize%}
+	<!-- Start All Pages -->
+
+	<!-- End All Pages -->
+	
+	<!-- Start blog details -->
+<div class="blog-box" xmlns="http://www.w3.org/1999/html">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+ 					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl-8 col-lg-8 col-12">
+					<div class="blog-inner-details-page">
+						<div class="blog-inner-box">
+							<div class="side-blog-img">
+								<img class="img-fluid" src="images/inner-blog-img.jpg" alt="">							
+
+							</div>
+							<h2 class="mt-3">{{recipe.rec_title}}</h2>
+							<div class="inner-blog-detail details-page">
+								<img src="{{recipe.rec_img1.url}}" class="img-fluid mb-3 " style="height:500px;width:668px;"/>
+								<div class="row">
+									<div class="col-md-6 col-lg-4 col-12">
+										<img src="{{recipe.rec_img2.url}}" class="img-fluid rounded" style="height:150px; width:220px;"/>
+									</div>
+									<div class="col-md-6 col-lg-4 col-12">
+										<img src="{{recipe.rec_img3.url}}" class="img-fluid rounded" style="height:150px; width:220px;"/>
+									</div>
+									<div class="col-md-6 col-lg-4 col-12">
+										<img src="{{recipe.rec_img4.url}}" class="img-fluid rounded" style="height:150px; width:220px;"/>
+									</div>
+								</div>
+ 								<ul class="pt-3">
+									<li>Posted By:<span>{{recipe.user_id}}</span></li>
+									<li>|</li>
+									<li>Date and Time:<span>{{recipe.rec_posteddate}}</span></li>
+									<li>|</li>
+									<li>Prep Time:<span>{{recipe.rec_preptime}}</span></li>
+									<li>|</li>
+									<li>Cook Time:<span>{{recipe.rec_cooktime}}</span></li>
+									<li>|</li>
+									<li>Servings:<span>{{recipe.rec_servings}}</span></li>
+								</ul>
+								<h2 class="pt-2">Details</h2>
+								<p>{{recipe.rec_details}}</p>
+								<div class="bg-light p-4 mb-3">
+									<h2 class="pt-3">Ingredients</h2>
+									<ol>
+										{% for x in inglist%}
+										<li style="list-style:decimal !important">{{x|title}}</li>
+										{%endfor%}
+									</ol>
+								</div>
+								<div class="bg-light p-3 mb-3">
+									<h2 class="pt-2">Directions</h2>
+									<ol>
+										{% for x in dirlist%}
+										<li >{{x|title}}</li>
+										{%endfor%}
+									</ol>
+								</div>
+								<div class="bg-light p-5">
+									<ol>
+									<h2 class="pt-2">Nutrition Facts</h2>
+									{%for x in nutlist%}
+									<li style="list-style:decimal !important">{{x}}</li>
+									{%endfor%}
+									</ol>
+								</div>
+ 							</div>
+						</div>
+						<div class="blog-comment-box">
+							<h3>Comments</h3>
+							{%for i in reviews%}
+
+							<div class="comment-item">
+								<div class="comment-item-left">
+									<img src="{{i.image.url}}" alt="">
+								</div>
+								<div class="comment-item-right">
+									<div class="pull-left">
+										<a href="#">{{i.user_id}}</a>
+									</div>
+									<div class="pull-right">
+										<i class="fa fa-clock-o" aria-hidden="true"></i>Time : <span>{{i.posteddate}}</span>
+									</div>
+									<div class="des-l">
+										<p>{{i.review}}</p>
+									</div>
+									<b>Rating:--</b>  <span>{{i.rating}}</span>
+								</div>
+							</div>
+							{%endfor%}
+						</div>
+
+						<div class="comment-respond-box bg-light p-5">
+							<h3>Leave your comment </h3>
+							<div class="comment-respond-form">
+								<form id="commentrespondform" class="comment-form-respond row" method="post" action="/review/{{recipe.id}}">
+									 {% csrf_token %}
+									<div class="col-lg-10 col-md-10 col-sm-10">
+										 {{recipe.review}}
+										<div class="form-group">
+											<textarea class="form-control" name="review" id="textarea_com" placeholder="Your Reviews" rows="2"></textarea>
+										</div>
+										<div class="form-group">
+										 Rating
+										<select class="form-control" name="rating">
+										  <option selected>Rating</option>
+										  <option value="1">1</option>
+										  <option value="2">2</option>
+										  <option value="3">3</option>
+										  <option value="4">4</option>
+										  <option value="5">5</option>
+									 </select>
+									</div>
+									</div>
+
+									<div class="col-lg-12 col-md-12 col-sm-12">
+										<button class="btn btn-submit">Submit</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-xl-4 col-lg-4 col-md-6 col-sm-8 col-12 blog-sidebar">
+					<div class="right-side-blog">
+						<h3>Search</h3>
+						<div class="blog-search-form">
+							<input name="search" placeholder="Search blog" type="text">
+							<button class="search-btn">
+								<i class="fa fa-search" aria-hidden="true"></i>
+							</button>
+						</div>
+						<h3>Categories</h3>
+						<div class="blog-categories">
+							<ul>
+								{% for i in categories%}
+								<li><a href="/recipebycat/{{i.id}}">{{i.cat_name}}</a></li>
+								{%endfor%}
+							</ul>
+						</div>
+						<h1><b>Related recipes</b></h1>
+						<div class="post-box-blog">
+							<div class="recent-post-box">
+								<div class="recent-box-blog">
+									<div class="recent-img">
+										<img class="img-fluid" src="images/post-img-01.jpg" alt="">
+									</div>
+
+										 	{% for i in relatedrecipes%}
+										    <div class="row">
+												<div class="col-lg-3 ">
+													<img src="{{i.rec_img2.url}}"  style="width:100px;height:100px;"/>
+
+												</div>
+												<div class="col-lg-9">
+
+													<h4 class="pl-4"><a href="/detail/{{i.id}}">{{i.rec_title}}</a></h4>
+													<p class="pl-4 small">{{i.rec_details}}</p>
+
+												</div>
+											</div>
+											{%endfor%}
+
+
+								</div>
+							</div>
+						</div>
+						<h3>Recent Tag</h3>
+						<div class="blog-tag-box">
+							<ul class="list-inline tag-list">
+								<li class="list-inline-item"><a href="#">Food</a></li>
+								<li class="list-inline-item"><a href="#">Drink</a></li>
+								<li class="list-inline-item"><a href="#">Nature</a></li>
+								<li class="list-inline-item"><a href="#">Italian</a></li>
+								<li class="list-inline-item"><a href="#">Bootstrap4</a></li>
+								<li class="list-inline-item"><a href="#">Fashion</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+	</div>
+	<!-- End details -->
+	
+	<!-- Start Contact info -->
+	<div class="contact-imfo-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-volume-control-phone"></i>
+					<div class="overflow-hidden">
+						<h4>Phone</h4>
+						<p class="lead">
+							+01 123-456-4590
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-envelope"></i>
+					<div class="overflow-hidden">
+						<h4>Email</h4>
+						<p class="lead">
+							yourmail@gmail.com
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa fa-map-marker"></i>
+					<div class="overflow-hidden">
+						<h4>Location</h4>
+						<p class="lead">
+							800, Lorem Street, US
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact info -->
+	
+	<!-- Start Footer -->
+{%include 'footer.html'%}

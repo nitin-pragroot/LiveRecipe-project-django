@@ -1,0 +1,46 @@
+{% load static %}
+{% include 'header.html' %}
+<section id="inner-headline">
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="pageTitle">My Recipe</h2>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="content">
+	<div class="container pt-4 pb-5">
+
+	    <div class="row">
+		   <div class="col-lg-10 mx-auto">
+				<table class="table table-striped">
+					<tr>
+						<td>Recipe</td>
+						<td>Details</td>
+						<td>Edit</td>
+						<td>Delete</td>
+					</tr>
+					{%for i in recipes %}
+					<tr>
+						<td>
+							<h3>{{i.rec_title}}</h3>
+							<img src="{{i.rec_img1.url}}" class="img-fluid"/>
+						</td>
+						<td>
+							<p>{{i.rec_ingredients}}</p>
+							<p>{{i.rec_catid}}</p>
+							<p>{{i.rec_details}}</p>
+						</td>
+						<td><a href="/editrecipe/{{i.id}}">Edit</a></td>
+						<td><a href="/delrecipe/{{i.id}}">Delete</a></td>
+
+					</tr>
+					{%endfor %}
+				</table>
+		   </div>
+        </div>
+
+    </div>
+</section>
+  {% include 'footer.html' %}

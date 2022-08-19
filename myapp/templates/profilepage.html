@@ -1,0 +1,81 @@
+{% load static %}
+{% include 'header.html' %}
+<section id="inner-headline">
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="pageTitle">User Profile</h2>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="content">
+	<div class="container pt-4 pb-5">
+		 <form name="sentMessage"  enctype="multipart/form-data"  novalidate method="post" >
+                  {% csrf_token %}
+			  <div class="row  pb-2 mb-3 bg-light">
+		    		<div class="col-md-2"><!-- Form itself -->
+						<img src="{{user1.user_image.url}}" style="height:150px;width:150px" class="img-thumbnail"/>
+					</div>
+				  <div class="col-md-10"><!-- Form itself -->
+						<h3>{{user.username}}</h3>
+						<h3>Email:{{user.email}}</h3>
+						<h3>Phone:{{user1.user_phone}}</h3>
+						<h3>Location:{{user1.user_city}}</h3>
+				  </div>
+			  </div>
+	    <div class="row">
+		    <div class="col-md-6"><!-- Form itself -->
+
+                <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image" class="form-control"/>
+						<p class="help-block"></p>
+					 </div>
+	            </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="fname" value="{{user1.user_fname}}" class="form-control" {% if user1.user_fname == None %}   {% endif %}/>
+						<p class="help-block"></p>
+		           </div>
+			    </div>
+                 <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="lname" value="{{user1.user_lname}}" class="form-control" placeholder="Last name" />
+						<p class="help-block"></p>
+		           </div>
+			    </div>
+				 <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="phone" value="{{user1.user_phone}}" class="form-control" placeholder="Phone No." />
+						<p class="help-block"></p>
+		           </div>
+			        </div>
+				<div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="city" value="{{user1.user_city}}" class="form-control" placeholder="City name" />
+						<p class="help-block"></p>
+		           </div>
+			    </div>
+
+			</div>
+			  <div class="col-md-6"><!-- Form itself -->
+                     <div class="control-group">
+					 <div class="controls">
+					 <textarea rows="10" cols="100" name="info" class="form-control" placeholder="Informations" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999 " style="resize:none">{{user1.user_info}}</textarea>
+					 <p class="help-block"></p>
+					 </div>
+              	 </div>
+				   <div id="success"> </div> <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary ">Update</button>
+
+            </div>
+
+
+              </div>
+         </form>
+    </div>
+</section>
+  {% include 'footer.html' %}

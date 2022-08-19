@@ -1,0 +1,150 @@
+{% load static %}
+{% include 'header.html' %}
+<section id="inner-headline">
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-lg-12">
+
+			</div>
+		</div>
+	</div>
+</section>
+<section id="content p-5">
+	<div class="container pt-4 pb-5 p-5">
+		<h2 class="pageTitle mb-3">Edit Recipe</h2>
+		 <form name="sentMessage"  enctype="multipart/form-data"  novalidate method="post">
+                  {% csrf_token %}
+	    <div class="row">
+		    <div class="col-md-6"><!-- Form itself -->
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="title" value="{{recipe.rec_title}}" class="form-control" placeholder="Recipe Name" />
+						<p class="help-block"></p>
+		           </div>
+	             </div>
+
+			    	<div class="control-group">
+                    <div class="controls">
+						<select  name="category" class="form-control">
+							<option>--Select Category--</option>
+
+							{% for i in categories%}
+							<option value="{{i.id}}" {% if recipe.rec_catid == i %} selected="selected" {%endif%}>{{i.cat_name}}</option>
+							{%endfor%}
+						</select>
+				 	 <p class="help-block"></p>
+					</div>
+	            </div>
+
+				 <div class="control-group">
+					 <div class="controls">
+					 <textarea rows="10" cols="100" name="details" class="form-control" placeholder="Recipe Details" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999" style="resize:none">{{recipe.rec_details}}</textarea>
+					 <p class="help-block"></p>
+					 </div>
+              	 </div>
+
+
+
+                 <div class="control-group">
+                    <div class="controls">
+                       <textarea rows="5" cols="100" name="ingredients" class="form-control" placeholder="Recipe Ingredients" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999" style="resize:none">{{recipe.rec_ingredients}}</textarea>
+						<p class="help-block"></p>
+		           </div>
+	             </div>
+
+			    <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="nutfacts" value="{{recipe.rec_nutfacts}}" class="form-control" placeholder="Nutrition Facts" />
+						<p class="help-block"></p>
+		           </div>
+			    </div>
+
+				  <div class="control-group">
+                    <div class="controls">
+
+						<select name="type" class="form-control">
+							<option>--Select Type--</option>
+							<option {% if recipe.rec_type == 'Indian' %} selected="selected" {%endif%}>Indian</option>
+							<option {% if recipe.rec_type == 'Chinese' %} selected="selected" {%endif%}>Chinese</option>
+							<option {% if recipe.rec_type == 'Afgani' %} selected="selected" {%endif%}>Afgani</option>
+							<option {% if recipe.rec_type == 'Dubai' %} selected="selected" {%endif%}>Dubai</option>
+						</select>
+ 						<p class="help-block"></p>
+					</div>
+	            </div>
+				<div class="control-group">
+                    <div class="controls">
+						<textarea rows="5" cols="100" name="directions" class="form-control" placeholder="Recipe Directions" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999" style="resize:none">{{recipe.rec_directions}}</textarea>
+						<p class="help-block"></p>
+		  			 </div>
+				</div>
+
+            </div>
+			  <div class="col-md-6"><!-- Form itself -->
+
+				 <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="preptime" value="{{recipe.rec_preptime}}" class="form-control" placeholder="Preptime" />
+						<p class="help-block"></p>
+		           </div>
+				</div>
+				 <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="cooktime" value="{{recipe.rec_cooktime}}" class="form-control" placeholder="Cooktime" />
+						<p class="help-block"></p>
+		           </div>
+				</div>
+
+
+
+				  <div class="control-group">
+                    <div class="controls">
+						<input type="text"  name="servings" value="{{recipe.rec_servings}}" class="form-control" placeholder="Servings" />
+						<p class="help-block"></p>
+		   			</div>
+	            </div>
+
+			   <div class="control-group">
+                    <div class="controls">
+						<input type="file" name="image1" class="form-control"/>
+						<img src="{{recipe.rec_img1.url}}" style="height:100px;width:100px"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+			    <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image2" class="form-control"/>
+						<img src="{{recipe.rec_img2.url}}" style="height:100px;width:100px"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+
+			    <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image3" class="form-control"/>
+						<img src="{{recipe.rec_img3.url}}" style="height:100px;width:100px"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+
+			    <div class="control-group">
+                    <div class="controls">
+						<input type="file" name="image4" class="form-control"/>
+						<img src="{{recipe.rec_img4.url}}" style="height:100px;width:100px"/>
+						<p class="help-block"></p>
+					</div>
+	           </div>
+
+             <div id="success"> </div> <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary ">Update</button><br/>
+
+            </div>
+        </div>
+			  </form>
+    </div>
+</section>
+  {% include 'footer.html' %}

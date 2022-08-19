@@ -1,0 +1,144 @@
+{% load static %}
+{% include 'header.html' %}
+<section id="inner-headline">
+	<div class="container pt-4">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2 class="pageTitle">Add Recipe</h2>
+			</div>
+		</div>
+	</div>
+</section>
+<section id="content">
+	<div class="container pt-4 pb-5">
+		 <form name="sentMessage"  enctype="multipart/form-data"  novalidate method="post" >
+                  {% csrf_token %}
+	    <div class="row">
+		    <div class="col-md-6"><!-- Form itself -->
+
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="title" class="form-control" placeholder="Recipe Name" />
+						<p class="help-block"></p>
+		           </div>
+	             </div>
+
+			    	<div class="control-group">
+                    <div class="controls">
+						<select  name="category" class="form-control">
+							<option>--Select Category--</option>
+
+							{% for i in categories%}
+							<option value="{{i.id}}">{{i.cat_name}}</option>
+							{%endfor%}
+						</select>
+				 	 <p class="help-block"></p>
+					</div>
+	            </div>
+
+				 <div class="control-group">
+					 <div class="controls">
+					 <textarea rows="10" cols="100" name="details" class="form-control" placeholder="Recipe Details" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999" style="resize:none"></textarea>
+					 <p class="help-block"></p>
+					 </div>
+              	 </div>
+
+
+
+                 <div class="control-group">
+                    <div class="controls">
+                       <textarea rows="5" cols="100" name="ingredients" class="form-control" placeholder="Recipe Ingredients" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999" style="resize:none"></textarea>
+						<p class="help-block"></p>
+		           </div>
+	             </div>
+
+			    <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="nutfacts" class="form-control" placeholder="Nutrition Facts" />
+						<p class="help-block"></p>
+		           </div>
+			    </div>
+
+				  <div class="control-group">
+                    <div class="controls">
+						<select name="type"  name="type" class="form-control">
+							<option>--Select Type--</option>
+							<option>Indian</option>
+							<option>Chinese</option>
+							<option>Afgani</option>
+							<option>Dubai</option>
+						</select>
+						<p class="help-block"></p>
+		   			</div>
+	            </div>
+
+
+            </div>
+			  <div class="col-md-6"><!-- Form itself -->
+
+				 <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="preptime" class="form-control" placeholder="Preptime" />
+						<p class="help-block"></p>
+		           </div>
+				</div>
+				 <div class="control-group">
+                    <div class="controls">
+                        <input type="text"  name="cooktime" class="form-control" placeholder="Cooktime" />
+						<p class="help-block"></p>
+		           </div>
+				</div>
+
+			    <div class="control-group">
+                    <div class="controls">
+						<textarea rows="5" cols="100" name="directions" class="form-control" placeholder="Recipe Directions" id="message"  minlength="5" data-validation-minlength-message="Min 5 characters"
+							maxlength="999" style="resize:none"></textarea>
+						<p class="help-block"></p>
+		  			 </div>
+				</div>
+
+				  <div class="control-group">
+                    <div class="controls">
+						<input type="text"  name="servings" class="form-control" placeholder="Servings" />
+						<p class="help-block"></p>
+		   			</div>
+	            </div>
+
+			   <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image1" class="form-control"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+			    <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image2" class="form-control"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+
+			    <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image3" class="form-control"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+
+			    <div class="control-group">
+                    <div class="controls">
+						<input type="file"  name="image4" class="form-control"/>
+						<p class="help-block"></p>
+					 </div>
+	           </div>
+
+             <div id="success"> </div> <!-- For success/fail messages -->
+            <button type="submit" class="btn btn-primary ">Add Recipe</button><br/>
+
+            </div>
+        </div>
+			  </form>
+    </div>
+</section>
+  {% include 'footer.html' %}

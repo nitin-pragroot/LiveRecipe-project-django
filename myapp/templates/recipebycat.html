@@ -1,0 +1,71 @@
+{%load static%}
+{%include 'header.html'%}
+{%load humanize%}
+	<div class="blog-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h1>Recipes by Category</h1>
+						 {% if norecords%}
+							<p class="alert alert-danger mt-2">{{norecords}}</p>
+						{%endif%}
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{%for i in recipes%}
+				<div class="col-lg-4 col-md-6 col-12">
+						<div class="blog-box-inner">
+
+							<img src="{{i.rec_img1.url}}" class="img-fluid mb-3 rounded " style="height:200px;width:350px;"/>
+							<h2>{{i.rec_title|truncatechars:31}}</h2>
+							<ul class="text-danger pb-3">
+								<li><span>Post by {{i.user_id}}</span></li>
+								<li><span>{{i.rec_posteddate|naturaltime}} </span></li>
+							</ul>
+							<p>{{i.rec_details|truncatechars:120}}</p>
+ 							<a class="btn btn-lg btn-circle btn-outline-new-white" href="detail/{{i.id}}">Details</a>
+
+					</div>
+				</div>
+				{%endfor%}
+			</div>
+		</div>
+	</div>
+
+	<div class="contact-imfo-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-volume-control-phone"></i>
+					<div class="overflow-hidden">
+						<h4>Phone</h4>
+						<p class="lead">
+							+01 123-456-4590
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-envelope"></i>
+					<div class="overflow-hidden">
+						<h4>Email</h4>
+						<p class="lead">
+							yourmail@gmail.com
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa fa-map-marker"></i>
+					<div class="overflow-hidden">
+						<h4>Location</h4>
+						<p class="lead">
+							800, Lorem Street, US
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact info -->
+{%include 'footer.html'%}

@@ -1,0 +1,133 @@
+{%load static%}
+{%include 'header.html'%}
+<style>
+	.pagination li a
+	{
+		padding: 7px 10px;
+		border:1px solid #eee;
+		margin-right: 6px;
+		border-radius: 4px;
+		//color:#fff;
+	}
+	.pagination
+	{
+		width:50%;
+		margin:0 auto;
+		margin-top:30px;
+	}
+	.active
+	{
+		background: #d65106;
+		padding:4px 12px 2px;
+		border:1px solid #eee;
+		margin-right: 6px;
+		border-radius: 4px;
+		margin-top:-4px;
+		color:#fff;
+	}
+</style>
+	<div class="blog-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="heading-title text-center">
+						<h2>All Recipes</h2>
+						<p>Lorem Ipsum is simply dummy text of the printing and typesetting</p>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{%for i in recipes%}
+				<div class="col-lg-4 col-md-6 col-12">
+						<div class="blog-box-inner">
+
+							<img src="{{i.rec_img1.url}}" class="img-fluid mb-3 rounded " style="height:200px;width:350px;"/>
+							<h2><a href="detail/{{i.id}}">{{i.rec_title|truncatechars:31}}</a></h2>
+							<ul class="text-danger pb-3">
+								<li><span>Post by {{i.user_id}}</span></li>
+								<li><span>{{i.rec_posteddate}} </span></li>
+							</ul>
+							<p>{{i.rec_details|truncatechars:120}}</p>
+ 							<a class="btn btn-lg btn-circle btn-outline-new-white" href="detail/{{i.id}}">Details</a>
+
+					</div>
+				</div>
+				{%endfor%}
+
+        <!--<div class="pagination">
+    <span class="step-links">
+        {% if recipes.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ recipes.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
+        </span>
+
+        {% if recipes.has_next %}
+            <a href="?page={{ recipes.next_page_number }}">next</a>
+            <a href="?page={{ recipes.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>-->
+			</div>
+			{% if recipes.has_other_pages %}
+  <ul class="pagination">
+    {% if recipes.has_previous %}
+      <li><a href="?page={{ recipes.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in recipes.paginator.page_range %}
+      {% if recipes.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if recipes.has_next %}
+      <li><a href="?page={{ recipes.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+		</div>
+	</div>
+
+	<div class="contact-imfo-box">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-volume-control-phone"></i>
+					<div class="overflow-hidden">
+						<h4>Phone</h4>
+						<p class="lead">
+							+01 123-456-4590
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4 arrow-right">
+					<i class="fa fa-envelope"></i>
+					<div class="overflow-hidden">
+						<h4>Email</h4>
+						<p class="lead">
+							yourmail@gmail.com
+						</p>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<i class="fa fa-map-marker"></i>
+					<div class="overflow-hidden">
+						<h4>Location</h4>
+						<p class="lead">
+							800, Lorem Street, US
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Contact info -->
+{%include 'footer.html'%}

@@ -1,0 +1,21 @@
+{% load static %}
+{%include "header.html" %}
+<section>
+<form class="py-5 w-50 mx-auto"   method="post">
+    {% if error%}
+            <p class="alert alert-danger mt-2">{{error}}</p>
+    {%endif%}
+  <h1>Change Password</h1>
+  {% csrf_token%}
+   <div class="form-group">
+    <label>New Password</label>
+    <input type="password" class="form-control" name="new_pass">
+  </div>
+  <div class="form-group">
+    <label>Confirm Password:</label>
+    <input type="password" class="form-control" name="cpass">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</section>
+{%include "footer.html" %}
